@@ -1,0 +1,116 @@
+﻿<Page x:Class="CarService.Pages.VisitsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CarService.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="900"
+      Title="VisitsPage">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <!-- Start: GridRow Top -->
+        <Grid Grid.Row="0">
+
+            <!-- Name -->
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                <Image Source="/Assets/Logo/service_logo.png" Style="{StaticResource LvImg}"  Margin="100 0 0 0"/>
+                <TextBlock Text="Поломка" FontSize="24" Margin="16 0 0 0"/>
+                <TextBlock Text="Список посещений" FontSize="30" Margin="25 0 0 0"/>
+            </StackPanel>
+
+        </Grid>
+        <!-- End: GridRow Top -->
+
+        <!-- Start: GridRow Center One -->
+        <Grid Grid.Row="1">
+
+            <!-- Search -->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <Button x:Name="BackBtn" Content="Назад"  Click="BackBtn_Click" Width="105"/>
+                <TextBlock Text="Поиск:" Margin="25 0 0 0" VerticalAlignment="Center"/>
+                <TextBox x:Name="SearchTb" Width="300" Margin="15 0 0 0" TextChanged="SearchTb_TextChanged" PreviewTextInput="TextBox_PreviewTextInput"/>
+                <Button Background="#ff9c1a" BorderBrush="#ff9c1a" x:Name="AddVisitBtn" Content="Добавить посещение" Margin="25 0 0 0" Click="AddVisitBtn_Click" Width="189"/>
+            </StackPanel>
+
+        </Grid>
+        <!-- End: GridRow Center One -->
+
+        <!-- Start: GridRow Center Two -->
+        <Grid Grid.Row="2">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                <!-- List of customers -->
+                <ListView x:Name="VisitsLv" d:ItemsSource="{d:SampleData ItemCount=5}" Width="700" Height="413">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#FFCECBCB" BorderThickness="1" Height="115" Margin="5">
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Information -->
+                                    <Grid Grid.Column="0">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Full Name -->
+                                        <StackPanel Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                                            <TextBlock FontSize="20" Text="{Binding Client.FullName}"/>
+                                        </StackPanel>
+
+                                        <!-- Service -->
+                                        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                                            <TextBlock Text="{Binding Service.Title, StringFormat='Услуга: {0}'}"/>
+                                        </StackPanel>
+
+                                        <!-- Date of Start -->
+                                        <StackPanel Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                                            <TextBlock Text="{Binding StartTime, StringFormat='Дата: {0:dd.MM.yy}'}"/>
+                                        </StackPanel>
+
+                                        <!-- Comment -->
+                                        <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0">
+                                            <TextBlock Text="{Binding Comment, StringFormat='Комментарий: {0}'}"/>
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <!-- Navigation -->
+                                    <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                                        <Button x:Name="EditBtn" Style="{StaticResource LvBtn}" Click="EditBtn_Click">
+                                            <Image Source="/Assets/Images/edit.png" Style="{StaticResource LvImg}"/>
+                                        </Button>
+                                        <Button x:Name="DeleteBtn" Style="{StaticResource LvBtn}" Margin="10 0 0 0" Click="DeleteBtn_Click">
+                                            <Image Source="/Assets/Images/delete.png" Style="{StaticResource LvImg}"/>
+                                        </Button>
+                                    </StackPanel>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+        </Grid>
+        <!-- End: GridRow Center Two -->
+
+    </Grid>
+</Page>
